@@ -1,0 +1,5 @@
+MODULE schemat
+	SUBMODULE SDC_FileReader
+		INSTANCE XLXI_2
+	SUBMODULE sdc_controller
+		INSTANCE XLXI_8
