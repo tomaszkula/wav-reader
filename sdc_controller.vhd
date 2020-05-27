@@ -61,15 +61,17 @@ architecture Behavioral of sdc_controller is
    signal sFmtMnS : STD_LOGIC := 'U';
    signal sFmtSRate : STD_LOGIC_VECTOR (15 downto 0) := (others => '1');
 	
-	signal sTick : STD_LOGIC := 'U';
+	signal sSTickRate : STD_LOGIC := '0';
 	signal sPause : STD_LOGIC := '0';
 	
-	signal tick : integer := 0;
+	signal tick_counter : integer := 0;
 	signal pause_tick_count, pause_tick : integer := -1;
 begin
 	Fmt8n16 <= sFmt8n16;
 	FmtMnS <= sFmtMnS;
 	FmtSRate <= sFmtSRate;
+	
+	STickRate <= sSTickRate;
 
 	process1 : process(Clk)
 	begin
@@ -77,23 +79,13 @@ begin
 			if Reset = '1' then
 				counter <= 0;
 			else
-				if tick mod 2 = 0 then
-					if sPause = '0' then
-						FR_DO_Pop <= '1';
-					end if;
-				else
-					FR_DO_Pop <= '0';
-				end if;
+				tick_counter <= (tick_counter + 1) mod 50000000;
 				
-				tick <= tick + 1;
-				if tick > 50000000 then
-					tick <= 0;
-				end if;
-				
-				if sTick = '1' then
+				if sSTickRate = '1' then
 					pause_tick <= 0;
 					sPause <= '1';
 				end if;
+				
 				if sPause = '1' then
 					pause_tick <= pause_tick + 1;
 					
@@ -101,7 +93,7 @@ begin
 						sPause <= '0';
 					end if;
 				end if;
-			
+
 				counter <= next_counter;
 				
 				Fmt8n16_state <= next_Fmt8n16_state;
@@ -130,17 +122,17 @@ begin
 				if sample = A then
 					if byte = ZERO then
 						byte <= FIRST;
-						sTick <= '0';
+						sSTickRate <= '0';
 					elsif byte = FIRST then
 						DO_L <= FR_DO & X"00";
 						DO_R <= FR_DO & X"00";
 						byte <= ZERO;
-						sTick <= '1';
+						sSTickRate <= '1';
 					end if;
 				elsif sample = B then
 					if byte = ZERO then
 						byte <= FIRST;
-						sTick <= '0';
+						sSTickRate <= '0';
 					elsif byte = FIRST then
 						DO_L <= FR_DO & X"00";
 						DO_R <= FR_DO & X"00";
@@ -149,24 +141,24 @@ begin
 						DO_L(7 downto 0) <= FR_DO;
 						DO_R(7 downto 0) <= FR_DO;
 						byte <= ZERO;
-						sTick <= '1';
+						sSTickRate <= '1';
 					end if;
 				elsif sample = C then
 					if byte = ZERO then
 						byte <= FIRST;
-						sTick <= '0';
+						sSTickRate <= '0';
 					elsif byte = FIRST then 
 						DO_L <= FR_DO & X"00";
 						byte <= SECOND;
 					elsif byte = SECOND then
 						DO_R <= FR_DO & X"00";
 						byte <= ZERO;
-						sTick <= '1';
+						sSTickRate <= '1';
 					end if;
 				elsif sample = D then
 					if byte = ZERO then
 						byte <= FIRST;
-						sTick <= '0';
+						sSTickRate <= '0';
 					elsif byte = FIRST then
 						DO_L <= FR_DO & X"00";
 						byte <= SECOND;
@@ -179,7 +171,7 @@ begin
 					elsif byte = FOURTH then
 						DO_R(7 downto 0) <= FR_DO;
 						byte <= ZERO;
-						sTick <= '1';
+						sSTickRate <= '1';
 					end if;
 				end if;
 			end if;
@@ -233,13 +225,15 @@ begin
 		end if;
 	end process process7;
 	
-	process8 : process(sTick)
+	process8 : process(tick_counter)
 	begin
-		STickRate <= sTick;
-		
-		--if sTick = '1' then
-		--	sPause <= '1';
-		--end if;
+		if tick_counter mod 2 = 0 then
+			if sPause = '0' and sSTickRate = '0' then
+				FR_DO_Pop <= '1';
+			end if;
+		else
+			FR_DO_Pop <= '0';
+		end if;
 	end process process8;
 	
 end Behavioral;

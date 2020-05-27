@@ -97,7 +97,7 @@ BEGIN
    process
 
       type file_int is file of character;
-      file WAV : file_int is in "C:/C.wav";
+      file WAV : file_int is in "C:/A.wav";
       variable i : character;
 
    begin

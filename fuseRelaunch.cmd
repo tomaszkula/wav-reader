@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "C:/Repositories/UCISW2_Project/test_sdc_controller_isim_beh.exe" -prj "C:/Repositories/UCISW2_Project/test_sdc_controller_beh.prj" "work.test_sdc_controller" 
