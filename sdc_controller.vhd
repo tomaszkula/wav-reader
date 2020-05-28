@@ -230,6 +230,8 @@ begin
 		if tick_counter mod 2 = 0 then
 			if sPause = '0' and sSTickRate = '0' then
 				FR_DO_Pop <= '1';
+			else
+				FR_DO_Pop <= '0';
 			end if;
 		else
 			FR_DO_Pop <= '0';
