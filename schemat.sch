@@ -20,7 +20,7 @@
         <signal name="FmtSRate(15:0)" />
         <signal name="DO_L(15:0)" />
         <signal name="DO_R(15:0)" />
-        <signal name="XLXN_17" />
+        <signal name="XLXN_32" />
         <port polarity="Input" name="SDC_MISO" />
         <port polarity="Output" name="SDC_MOSI" />
         <port polarity="Output" name="SDC_SCK" />
@@ -173,16 +173,13 @@
         <instance x="880" y="1632" name="XLXI_8" orien="R0">
         </instance>
         <branch name="FmtSRate(15:0)">
-            <wire x2="1344" y1="1472" y2="1472" x1="1328" />
-            <wire x2="1360" y1="1472" y2="1472" x1="1344" />
+            <wire x2="1360" y1="1472" y2="1472" x1="1328" />
         </branch>
         <branch name="DO_L(15:0)">
-            <wire x2="1344" y1="1536" y2="1536" x1="1328" />
-            <wire x2="1360" y1="1536" y2="1536" x1="1344" />
+            <wire x2="1360" y1="1536" y2="1536" x1="1328" />
         </branch>
         <branch name="DO_R(15:0)">
-            <wire x2="1344" y1="1600" y2="1600" x1="1328" />
-            <wire x2="1360" y1="1600" y2="1600" x1="1344" />
+            <wire x2="1360" y1="1600" y2="1600" x1="1328" />
         </branch>
         <iomarker fontsize="28" x="1360" y="1536" name="DO_L(15:0)" orien="R0" />
         <iomarker fontsize="28" x="1360" y="1600" name="DO_R(15:0)" orien="R0" />
