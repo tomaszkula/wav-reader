@@ -46,13 +46,12 @@
         <signal name="XLXN_52(11:0)" />
         <signal name="XLXN_54" />
         <signal name="XLXN_56" />
-        <signal name="XLXN_57" />
-        <signal name="XLXN_58" />
         <signal name="FName(3)" />
         <signal name="FName(2)" />
         <signal name="FName(1)" />
         <signal name="FName(0)" />
         <signal name="FName(7:4)" />
+        <signal name="XLXN_68" />
         <port polarity="Input" name="SDC_MISO" />
         <port polarity="Output" name="SDC_MOSI" />
         <port polarity="Output" name="SDC_SCK" />
@@ -206,7 +205,7 @@
             <blockpin signalname="SDC_SS" name="SDC_SS" />
             <blockpin name="Error(3:0)" />
             <blockpin signalname="XLXN_9(7:0)" name="DO(7:0)" />
-            <blockpin signalname="XLXN_57" name="DO_Rdy" />
+            <blockpin signalname="XLXN_68" name="DO_Rdy" />
             <blockpin name="Busy" />
             <blockpin signalname="FExt(1:0)" name="FExt(1:0)" />
             <blockpin signalname="Clk" name="Clk_Sys" />
@@ -214,7 +213,7 @@
         <block symbolname="sdc_controller" name="XLXI_8">
             <blockpin signalname="Clk" name="Clk" />
             <blockpin signalname="Reset" name="Reset" />
-            <blockpin signalname="XLXN_58" name="FR_DO_Rdy" />
+            <blockpin signalname="XLXN_68" name="FR_DO_Rdy" />
             <blockpin signalname="XLXN_9(7:0)" name="FR_DO(7:0)" />
             <blockpin signalname="XLXN_5" name="FR_DO_Pop" />
             <blockpin signalname="Fmt8n16" name="Fmt8n16" />
@@ -246,7 +245,7 @@
         </block>
         <block symbolname="FSM_SendSamples" name="XLXI_10">
             <blockpin signalname="XLXN_56" name="DWr_Busy" />
-            <blockpin signalname="XLXN_57" name="SampRdy" />
+            <blockpin signalname="XLXN_54" name="SampRdy" />
             <blockpin signalname="DO_L(15:0)" name="SampL(15:0)" />
             <blockpin signalname="DO_R(15:0)" name="SampR(15:0)" />
             <blockpin signalname="XLXN_54" name="SRate_Tick" />
@@ -256,7 +255,7 @@
             <blockpin signalname="XLXN_50(3:0)" name="DWr_Cmd(3:0)" />
             <blockpin signalname="XLXN_51(3:0)" name="DWr_Adr(3:0)" />
             <blockpin signalname="XLXN_52(11:0)" name="DWr_Data(11:0)" />
-            <blockpin signalname="XLXN_58" name="Samp_Pop" />
+            <blockpin name="Samp_Pop" />
         </block>
         <block symbolname="RotaryEnc" name="XLXI_11">
             <blockpin signalname="ROT_A" name="ROT_A" />
@@ -482,8 +481,10 @@
         </branch>
         <branch name="XLXN_54">
             <wire x2="1664" y1="1408" y2="1408" x1="1328" />
-            <wire x2="1664" y1="1408" y2="2192" x1="1664" />
+            <wire x2="1664" y1="1408" y2="2000" x1="1664" />
+            <wire x2="1664" y1="2000" y2="2192" x1="1664" />
             <wire x2="2000" y1="2192" y2="2192" x1="1664" />
+            <wire x2="2000" y1="2000" y2="2000" x1="1664" />
         </branch>
         <branch name="XLXN_56">
             <wire x2="1920" y1="1744" y2="2256" x1="1920" />
@@ -491,20 +492,6 @@
             <wire x2="3184" y1="1744" y2="1744" x1="1920" />
             <wire x2="3184" y1="1744" y2="2480" x1="3184" />
             <wire x2="3184" y1="2480" y2="2480" x1="3168" />
-        </branch>
-        <branch name="XLXN_57">
-            <wire x2="1936" y1="1904" y2="2000" x1="1936" />
-            <wire x2="2000" y1="2000" y2="2000" x1="1936" />
-            <wire x2="2432" y1="1904" y2="1904" x1="1936" />
-            <wire x2="2432" y1="1280" y2="1280" x1="2352" />
-            <wire x2="2432" y1="1280" y2="1904" x1="2432" />
-        </branch>
-        <branch name="XLXN_58">
-            <wire x2="880" y1="1472" y2="1472" x1="768" />
-            <wire x2="768" y1="1472" y2="1664" x1="768" />
-            <wire x2="2512" y1="1664" y2="1664" x1="768" />
-            <wire x2="2512" y1="1664" y2="2352" x1="2512" />
-            <wire x2="2512" y1="2352" y2="2352" x1="2448" />
         </branch>
         <instance x="912" y="240" name="XLXI_19" orien="R0" />
         <instance x="912" y="336" name="XLXI_20" orien="R0" />
@@ -578,5 +565,12 @@
         </branch>
         <instance x="784" y="80" name="XLXI_23" orien="R0">
         </instance>
+        <branch name="XLXN_68">
+            <wire x2="880" y1="1472" y2="1472" x1="816" />
+            <wire x2="816" y1="1472" y2="1664" x1="816" />
+            <wire x2="2432" y1="1664" y2="1664" x1="816" />
+            <wire x2="2432" y1="1280" y2="1280" x1="2352" />
+            <wire x2="2432" y1="1280" y2="1664" x1="2432" />
+        </branch>
     </sheet>
 </drawing>

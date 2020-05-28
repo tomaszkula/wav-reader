@@ -97,7 +97,7 @@ BEGIN
    process
 
       type file_int is file of character;
-      file WAV : file_int is in "C:/A.wav";
+      file WAV : file_int is in "C:/C.wav";
       variable i : character;
 
    begin
@@ -109,7 +109,6 @@ BEGIN
         wait for Tclk;
         read( WAV, i );
         FR_DO <= std_logic_vector( to_unsigned( character'pos( i ), 8 ) );
-		  --wait until rising_edge( Clk ) and FR_DO_Pop = '0';
         FR_DO_Rdy <= '1';
         wait until rising_edge( Clk ) and FR_DO_Pop = '1';
         FR_DO_Rdy <= '0';
@@ -117,7 +116,7 @@ BEGIN
 
       --FR_Busy <= '0';
 
-      wait; -- forever
+      wait;
    end process;
 
 END;
